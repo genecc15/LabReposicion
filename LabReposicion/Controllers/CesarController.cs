@@ -15,7 +15,7 @@ namespace LabReposicion.Controllers
     public class CesarController : ControllerBase
     {
         public static IWebHostEnvironment _environment;
-        private readonly  CesarMetodos CesarCifrado = new CesarMetodos();
+        private readonly CesarMetodos CesarCifrado = new CesarMetodos();
         private readonly CesarMetodos CesarDesc = new CesarMetodos();
         public CesarController(IWebHostEnvironment env)
         {

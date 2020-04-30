@@ -154,5 +154,6 @@ namespace LabReposicion.Controllers
             string[] FileName1 = objFile.Files.FileName.Split(".");
             ZigZagMetodos.ZigZagAlgortimo2(_environment.WebRootPath + "\\UploadZigZag\\" + objFile.Files.FileName, _environment.WebRootPath + "\\UploadZigZag\\" + archivo + ".txt", clave);
         }
+
     }
 }

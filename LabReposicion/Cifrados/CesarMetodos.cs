@@ -240,6 +240,7 @@ namespace LabReposicion.Cifrados
             ListaFinal2 = RepetidosP.Union(DiferentesP).ToList();
             var DiccionarioP = ListaFinal2.Zip(AlfabetoP, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v); //Combinar listas y volverlas diccionario
             #endregion
+
             using (var file = new FileStream(Rpath, FileMode.Open))
             {
                 using (var reader = new BinaryReader(file))
@@ -276,8 +277,10 @@ namespace LabReposicion.Cifrados
             }
             CurrentFile = Wpath;
         }
+        #endregion
     }
 
-    #endregion
 }
+
+
 
