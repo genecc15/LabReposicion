@@ -7,103 +7,31 @@ namespace LabReposicion
 {
     public class Nodo
     {
-        //Propiedades
-        public char? letra { get; set; }
-        public int frecuencia { get; set; }
+        public byte Fact { get; set; }
+        public decimal Probability { get; set; }
+        public Nodo Parent { get; set; }
+        public Nodo LeftNode { get; set; }
+        public Nodo RightNode { get; set; }
 
-        public Nodo padre { get; set; }
-        public Nodo izquierdo { get; set; }
-        public Nodo derecho { get; set; }
-
-        //Constructor 
-        public Nodo()
+        public Nodo(byte _fact, decimal _probability)
         {
-            this.letra = null;
-            this.frecuencia = 0;
-        }
-        public Nodo(char? letra, int frecuencia)
-        {
-            this.letra = letra;
-            this.frecuencia = frecuencia;
-        }
-        public Nodo(char? letra, int frecuencia, Nodo padre)
-        {
-            this.letra = letra;
-            this.frecuencia = frecuencia;
-            this.padre = padre;
+            Fact = _fact;
+            Probability = _probability;
+            LeftNode = null;
+            RightNode = null;
+            Parent = null;
         }
 
-        //Metodos
-        public char getChar()
+        public Nodo(decimal _probability)
         {
-            if (letra != null)
-            {
-                return this.letra.ToString().ToCharArray()[0];
-            }
-            else
-            {
-                return ' ';
-            }
+            Probability = _probability;
+            LeftNode = null;
+            RightNode = null;
+            Parent = null;
         }
-
-        public bool esRaiz()
+        public bool IsLeaf()
         {
-            if (padre != null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        public bool esHoja()
-        {
-            if ((derecho == null) && (izquierdo == null))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool esNodoIntermedio()
-        {
-            if (!esHoja() && !esRaiz())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool existeIzquierdo()
-        {
-            if (izquierdo != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool existeDerecho()
-        {
-            if (derecho != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return (RightNode == null && LeftNode == null) ? true : false;
         }
     }
 }

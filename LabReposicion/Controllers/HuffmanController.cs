@@ -54,8 +54,8 @@ namespace LabReposicion.Controllers
                     objFile.Files.CopyTo(_fileStream);
                     _fileStream.Flush();
                     _fileStream.Close();
-
-                    HuffmanCompress(objFile, id);
+                    
+                    //This code return the file.
                     var memory = new MemoryStream();
 
                     using (var stream = new FileStream(_environment.WebRootPath + "\\UploadHuffman\\" + id + ".huff", FileMode.Open))
@@ -66,7 +66,8 @@ namespace LabReposicion.Controllers
                     memory.Position = 0;
                     return File(memory, System.Net.Mime.MediaTypeNames.Application.Octet, id + ".huff");
                 }
-                else return StatusCode(404, "Vacio");
+
+                return StatusCode(404, "Archivo Vacio");
 
             }
             catch
@@ -78,6 +79,8 @@ namespace LabReposicion.Controllers
         public void HuffmanCompress(FileUploadAPI objFile, string id)
         {
             string[] FileName1 = objFile.Files.FileName.Split(".");
+            HuffmanMetodos.Comprimir(_environment.WebRootPath + "\\UploadHuffman\\" + objFile.Files.FileName, _environment.WebRootPath + "\\UploadHuffman\\" + id + ".huff", FileName1[0]);
+            //HuffComp.SetCompressions(_environment.WebRootPath + "\\UploadHuffman\\" + objFile.Files.FileName, _environment.WebRootPath + "\\UploadHuffman\\" + id + ".huff");
 
         }
 
@@ -94,7 +97,6 @@ namespace LabReposicion.Controllers
                     objFile.Files.CopyTo(_fileStream);
                     _fileStream.Flush();
                     _fileStream.Close();
-                    HuffmanDecompress(objFile);
                     var memory = new MemoryStream();
 
                     using (var stream = new FileStream(_environment.WebRootPath + "\\UploadHuffman\\" + objFile.Files.FileName + ".txt", FileMode.Open))
@@ -116,12 +118,6 @@ namespace LabReposicion.Controllers
             {
                 return StatusCode(404, "Error");
             }
-        }
-
-        public void HuffmanDecompress(FileUploadAPI ObjFile)
-        {
-            string[] FileName1 = ObjFile.Files.FileName.Split('.');
-
         }
     }
 }

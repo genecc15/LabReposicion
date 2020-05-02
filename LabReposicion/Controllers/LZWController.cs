@@ -79,6 +79,7 @@ namespace LabReposicion.Controllers
         {
             string[] FileName1 = objFile.Files.FileName.Split(".");
             LZWMetodos.LZWAlgoritmo(_environment.WebRootPath + "\\UploadLZW\\" + objFile.Files.FileName, _environment.WebRootPath + "\\UploadLZW\\" + id + ".lzw", _environment.WebRootPath + "\\UploadLZW\\" + "Compresiones.txt");
+       
         }
         [Route("/Decompress/LZW")]
         [HttpPost]
