@@ -15,6 +15,7 @@ namespace LabReposicion.Controllers
     {
         public static IWebHostEnvironment _environment;
         private readonly HuffmanMetodos HuffCompress = new HuffmanMetodos();
+        readonly HuffmanMetodos HuffDesc = new HuffmanMetodos();
 
         public HuffmanController(IWebHostEnvironment env)
         {
@@ -54,8 +55,8 @@ namespace LabReposicion.Controllers
                     objFile.Files.CopyTo(_fileStream);
                     _fileStream.Flush();
                     _fileStream.Close();
-                    
-                    //This code return the file.
+
+                    HuffmanCompress(objFile, id);
                     var memory = new MemoryStream();
 
                     using (var stream = new FileStream(_environment.WebRootPath + "\\UploadHuffman\\" + id + ".huff", FileMode.Open))
@@ -79,9 +80,8 @@ namespace LabReposicion.Controllers
         public void HuffmanCompress(FileUploadAPI objFile, string id)
         {
             string[] FileName1 = objFile.Files.FileName.Split(".");
-            HuffmanMetodos.Comprimir(_environment.WebRootPath + "\\UploadHuffman\\" + objFile.Files.FileName, _environment.WebRootPath + "\\UploadHuffman\\" + id + ".huff", FileName1[0]);
-            //HuffComp.SetCompressions(_environment.WebRootPath + "\\UploadHuffman\\" + objFile.Files.FileName, _environment.WebRootPath + "\\UploadHuffman\\" + id + ".huff");
-
+            HuffmanMetodos.Comprimir(_environment.WebRootPath + "\\UploadHuffman\\" + objFile.Files.FileName, _environment.WebRootPath + "\\UploadHuffman\\" + id + ".huff", FileName1[0], _environment.WebRootPath + "\\UploadHuffman\\" + "Compresiones.txt");
+          
         }
 
         [Route("/Decompress/Huffman")]
@@ -97,6 +97,8 @@ namespace LabReposicion.Controllers
                     objFile.Files.CopyTo(_fileStream);
                     _fileStream.Flush();
                     _fileStream.Close();
+                    HuffmanDescompress(objFile);
+
                     var memory = new MemoryStream();
 
                     using (var stream = new FileStream(_environment.WebRootPath + "\\UploadHuffman\\" + objFile.Files.FileName + ".txt", FileMode.Open))
@@ -105,9 +107,7 @@ namespace LabReposicion.Controllers
                     }
 
                     memory.Position = 0;
-                    return File(memory, System.Net.Mime.MediaTypeNames.Application.Octet, objFile.Files.FileName + objFile.Files.FileName + ".txt");
-
-
+                    return File(memory, System.Net.Mime.MediaTypeNames.Application.Octet, objFile.Files.FileName + ".txt");
                 }
                 else
                 {
@@ -119,5 +119,13 @@ namespace LabReposicion.Controllers
                 return StatusCode(404, "Error");
             }
         }
+
+        public void HuffmanDescompress(FileUploadAPI objFile)
+        {
+            string[] FileName1 = objFile.Files.FileName.Split(".");
+            HuffmanMetodos.Descomprimir(_environment.WebRootPath + "\\UploadHuffman\\" + objFile.Files.FileName, _environment.WebRootPath + "\\UploadHuffman\\" + FileName1[0] + ".txt");
+
+        }
+
     }
 }
