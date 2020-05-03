@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
 using System.Threading.Tasks;
+using System.IO;
 using System.Text;
 
-namespace LabReposicion
+namespace LabReposicion.Compressor
 {
     public class HuffmanMetodos
     {
