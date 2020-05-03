@@ -1,0 +1,1 @@
+Nombre Original: pro.txt, Razon de Compresion: 1.54, Factor de Compresion: 0.65, Porcentaje de Compresion: -53.61
