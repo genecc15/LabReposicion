@@ -126,8 +126,6 @@ namespace LabReposicion
             #endregion
         }
         #endregion
-
-        #region Descomprimir
         public static void descomprimir(string RPath, string WPath)
         {
 
@@ -245,6 +243,6 @@ namespace LabReposicion
                 throw new Exception("Exception caught in process: {0}", ex);
             }
         }
-        #endregion
+
     }
 }

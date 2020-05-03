@@ -82,25 +82,15 @@ namespace LabReposicion
             return ClaveCifrada;
         }
 
-        public static void DescifradoRSA(int Key, int N, string Nombre)
+        public static string DescifradoRSA(int Key, int N, string Clave)
         {
-            var NN = N;
-            var Cifrado = new FileStream(PathW, FileMode.Open);
-            var Reader = new StreamReader(Cifrado);
-            var NuevoNombre = $"{Path.GetDirectoryName(PathW)}\\{Nombre}.txt";
-            var Decifrado = new FileStream(NuevoNombre, FileMode.OpenOrCreate);
-            var Writer = new BinaryWriter(Decifrado);
-            var Line = Reader.ReadLine();
-            while (Line != null)
+            int NN = N;
+            var ClaveDescifrada = string.Empty;
+            foreach(var item in Clave)
             {
-                foreach (var item in Line)
-                {
-                    Writer.Write((char)int.Parse(Convert.ToString(BigInteger.ModPow((int)item, Key, NN))));
-                }
-                Line = Reader.ReadLine();
+                ClaveDescifrada += int.Parse(Convert.ToString(BigInteger.ModPow((int)item, Key, NN)));
             }
-            Decifrado.Close();
-            Cifrado.Close();
+            return ClaveDescifrada;
         }
     }
 }

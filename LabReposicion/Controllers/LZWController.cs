@@ -14,6 +14,7 @@ namespace LabReposicion.Controllers
     [ApiController]
     public class LZWController : ControllerBase
     {
+
         public static IWebHostEnvironment _environment;
         private readonly LZWMetodos LZWCompresion = new LZWMetodos();
         private readonly LZWMetodos LZWDesc = new LZWMetodos();
@@ -79,7 +80,6 @@ namespace LabReposicion.Controllers
         {
             string[] FileName1 = objFile.Files.FileName.Split(".");
             LZWMetodos.LZWAlgoritmo(_environment.WebRootPath + "\\UploadLZW\\" + objFile.Files.FileName, _environment.WebRootPath + "\\UploadLZW\\" + id + ".lzw", _environment.WebRootPath + "\\UploadLZW\\" + "Compresiones.txt");
-       
         }
         [Route("/Decompress/LZW")]
         [HttpPost]

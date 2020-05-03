@@ -58,7 +58,7 @@ namespace RSA.Controllers
                 var Json = JsonConvert.SerializeObject(Variables);
                 var client = new HttpClient();
                 var content = new StringContent(Json, Encoding.UTF8, "application/json");
-                var respose = await client.PostAsync("https://localhost:44313/", content);
+                var respose = await client.PostAsync("https://localhost:44313/api/RSA/CifrarCesar", content);
 
                 return StatusCode(202, "Cifrado Correctamente");
             }
@@ -80,7 +80,7 @@ namespace RSA.Controllers
                 var Json = JsonConvert.SerializeObject(Variables);
                 var client = new HttpClient();
                 var content = new StringContent(Json, Encoding.UTF8, "application/json");
-                var respose = await client.PostAsync("https://localhost:44313/", content);
+                var respose = await client.PostAsync("https://localhost:44313/api/RSA/DescifrarCesar", content);
                 return StatusCode(202, "Descifrado Correctamente");
             }
             else
