@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace LabReposicion
+namespace LabReposicion.Compressor
 {
     public class LZWMetodos
     {
@@ -243,6 +243,5 @@ namespace LabReposicion
                 throw new Exception("Exception caught in process: {0}", ex);
             }
         }
-
     }
 }

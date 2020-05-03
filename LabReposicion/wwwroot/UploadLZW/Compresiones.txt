@@ -1,2 +1,1 @@
-Nombre Original: Pruebita.txt, Razon de Compresion: 0.97, Factor de Compresion: 1.03, Porcentaje de Compresion: 3.37
 Nombre Original: pro.txt, Razon de Compresion: 0.93, Factor de Compresion: 1.08, Porcentaje de Compresion: 7.22

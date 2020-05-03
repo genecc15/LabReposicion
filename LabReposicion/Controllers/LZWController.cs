@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
+using LabReposicion.Compressor;
 using Microsoft.AspNetCore.Hosting;
 
 
 namespace LabReposicion.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class LZWController : ControllerBase
     {
-
         public static IWebHostEnvironment _environment;
         private readonly LZWMetodos LZWCompresion = new LZWMetodos();
         private readonly LZWMetodos LZWDesc = new LZWMetodos();
@@ -81,6 +81,7 @@ namespace LabReposicion.Controllers
             string[] FileName1 = objFile.Files.FileName.Split(".");
             LZWMetodos.LZWAlgoritmo(_environment.WebRootPath + "\\UploadLZW\\" + objFile.Files.FileName, _environment.WebRootPath + "\\UploadLZW\\" + id + ".lzw", _environment.WebRootPath + "\\UploadLZW\\" + "Compresiones.txt");
         }
+
         [Route("/Decompress/LZW")]
         [HttpPost]
         public async Task<IActionResult> UploadFileLZW([FromForm] FileUploadAPI objFile)
@@ -95,15 +96,17 @@ namespace LabReposicion.Controllers
                     _fileStream.Flush();
                     _fileStream.Close();
                     LZWDecompress(objFile);
-                    var memory = new MemoryStream();
+
+                    var memory2 = new MemoryStream();
 
                     using (var stream = new FileStream(_environment.WebRootPath + "\\UploadLZW\\" + objFile.Files.FileName + ".txt", FileMode.Open))
                     {
-                        await stream.CopyToAsync(memory);
+                        await stream.CopyToAsync(memory2);
                     }
 
-                    memory.Position = 0;
-                    return File(memory, System.Net.Mime.MediaTypeNames.Application.Octet, objFile.Files.FileName + objFile.Files.FileName + ".txt");
+                    memory2.Position = 0;
+
+                    return File(memory2, System.Net.Mime.MediaTypeNames.Application.Octet, objFile.Files.FileName+".txt");
 
 
                 }
